@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.realtimefirebasedatabaselab" />
+                  <option name="mobileSdkAppId" value="1:75838342756:android:9b36b6e2ca52fad9110171" />
+                  <option name="projectId" value="realtimefirebasedb-2bc1c" />
+                  <option name="projectNumber" value="75838342756" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

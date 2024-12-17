@@ -20,5 +20,30 @@ public class MainActivity extends AppCompatActivity {
     void initlization(){
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Logic();
+    }
+    void Logic(){
+        binding.btnSubmit.setOnClickListener(v->{
+            if(binding.tvName.getText().toString().isEmpty()){
+                binding.tvName.setError("Enter Name");
+                binding.tvName.requestFocus();
+            }
+            else if(binding.tvEmail.getText().toString().isEmpty()){
+                binding.tvEmail.setError("Enter Email");
+                binding.tvName.requestFocus();
+            }
+           else if(binding.tvPass.getText().toString().isEmpty()){
+                binding.tvName.setError("Enter Password");
+                binding.tvName.requestFocus();
+            }
+            else if(binding.tvAge.getText().toString().isEmpty()){
+                binding.tvEmail.setError("Enter age");
+                binding.tvName.requestFocus();
+            }
+            else{
+
+            }
+
+        });
     }
 }
