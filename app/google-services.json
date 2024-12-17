@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "75838342756",
+    "firebase_url": "https://realtimefirebasedb-2bc1c-default-rtdb.firebaseio.com",
+    "project_id": "realtimefirebasedb-2bc1c",
+    "storage_bucket": "realtimefirebasedb-2bc1c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75838342756:android:9b36b6e2ca52fad9110171",
+        "android_client_info": {
+          "package_name": "com.example.realtimefirebasedatabaselab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_YslG15ah7LeqiH2-6xmmVzCei_-JN9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
