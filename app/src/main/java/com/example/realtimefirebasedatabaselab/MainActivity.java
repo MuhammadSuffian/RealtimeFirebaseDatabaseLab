@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                             binding.tvEmail.setText("");
                             binding.tvPass.setText("");
                             binding.tvAge.setText("");
-                            Snackbar.make(binding.getRoot(),"Mubarak Your are logined",Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(binding.getRoot(),"Mubarak! Your are logined",Snackbar.LENGTH_SHORT).show();
                         }
                         else{
                             Snackbar.make(binding.getRoot(),"Something went wrong",Snackbar.LENGTH_SHORT).show();
