@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.realtimefirebasedatabaselab.databinding.ActivityLoginBinding;
 import com.example.realtimefirebasedatabaselab.databinding.ActivityMainBinding;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,30 +30,43 @@ public class login extends AppCompatActivity {
     void initlization(){
         binding= ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        DatabaseReference rf= FirebaseDatabase.getInstance().getReference("users");
         binding.btnGet.setOnClickListener(v->{
-            String username=binding.tvEmail.getText().toString().trim();
-            Query check=rf.orderByChild("username").equalTo(username);
-            check.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-                        String password=snapshot.child(username).child("password").getValue(String.class);
-                        Toast.makeText(login.this, "password"+password,Toast.LENGTH_SHORT).show();
-                        if(password.equals(password)){
-                            Toast.makeText(login.this, "Logineeedd",Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(login.this,"Failed",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            LoginToFirebaseRealtime();
         });
     }
+    void LoginToFirebaseRealtime() {
+        String email = binding.tvEmail.getText().toString();
+        String pass = binding.tvPass.getText().toString();
+        if (email.isEmpty() || pass.isEmpty()) {
+            Snackbar.make(binding.getRoot(), "Please enter all fields", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference rf = db.getReference("Users");
+        rf.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean found = false;
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    user minni = userSnapshot.getValue(user.class);
+                    if (minni != null && minni.getEmail().equals(email) && minni.getPass().equals(pass)) {
+                        found = true;
+                        Snackbar.make(binding.getRoot(), "Login successful! Welcome " + minni.getName(), Snackbar.LENGTH_SHORT).show();
+                        binding.tvName.setText(minni.getName());
+                        binding.tvAge.setText(minni.getAge());
+                        binding.tvPhone.setText(minni.getPhone());
+                        break;
+                    }
+                }
+                if (!found) {
+                    Snackbar.make(binding.getRoot(), "Invalid email or password", Snackbar.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Snackbar.make(binding.getRoot(), "Error: " + error.getMessage(), Snackbar.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

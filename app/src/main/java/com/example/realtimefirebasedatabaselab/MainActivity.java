@@ -1,5 +1,6 @@
 package com.example.realtimefirebasedatabaselab;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         Logic();
     }
     void Logic(){
+        binding.btnLogin.setOnClickListener(v->{
+            startActivity(new Intent(MainActivity.this,login.class));
+            finish();
+        });
         binding.btnSubmit.setOnClickListener(v->{
             if(binding.tvName.getText().toString().isEmpty()){
                 binding.tvName.setError("Enter Name");
@@ -84,19 +89,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
     void AddDataToFireBaseRealtime(){
         String name=binding.tvName.getText().toString();
         String email=binding.tvEmail.getText().toString();
