@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         String pass=binding.tvPass.getText().toString();
         String age=binding.tvAge.getText().toString();
         String phone=binding.tvPhone.getText().toString();
+
         user minni=new user(name,email,pass,age,phone);
 
 //        Map<String,Object> user=new HashMap<>();
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
 //        user.put("pass",pass);
 //        user.put("age",age);
 //        user.put("phone",phone);
-
         FirebaseDatabase db=FirebaseDatabase.getInstance();
         DatabaseReference rf=db.getReference("Users");
         rf.push().setValue(minni)
