@@ -58,15 +58,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    void firebaseDataAdd(){
+        String name=binding.tvName.getText().toString();
+        String email=binding.tvEmail.getText().toString();
+        String pass=binding.tvPass.getText().toString();
+        String age=binding.tvAge.getText().toString();
+        String phone=binding.tvPhone.getText().toString();
+        user u=new user(name,email,pass,age,phone);
+        DatabaseReference r1=FirebaseDatabase.getInstance().getReference("users");
+        r1.child(name).setValue(u);
+        r1.push().setValue(u)
+                .addOnCompleteListener(new OnCompleteListener<Void>(){
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            binding.tvName.setText("");
+                            binding.tvEmail.setText("");
+                            binding.tvPass.setText("");
+                            binding.tvAge.setText("");
+                            binding.tvPhone.setText("");
+                        }
+                        else{
+                            Snackbar.make(binding.getRoot(),"Something went wrong",Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     void AddDataToFireBaseRealtime(){
         String name=binding.tvName.getText().toString();
         String email=binding.tvEmail.getText().toString();
         String pass=binding.tvPass.getText().toString();
         String age=binding.tvAge.getText().toString();
         String phone=binding.tvPhone.getText().toString();
-
         user minni=new user(name,email,pass,age,phone);
-
 //        Map<String,Object> user=new HashMap<>();
 //        user.put("name",name);
 //        user.put("email",email);
@@ -75,8 +112,7 @@ public class MainActivity extends AppCompatActivity {
 //        user.put("phone",phone);
         FirebaseDatabase db=FirebaseDatabase.getInstance();
         DatabaseReference rf=db.getReference("Users");
-        rf.push().setValue(minni)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+        rf.push().setValue(minni).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
